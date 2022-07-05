@@ -9,12 +9,19 @@
       width: 400px;
       height: 400px;
       border-collapse: collapse;
+
     }
 
-    .board td {
+    .row {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .row>div {
       border: 1px solid black;
-      width: 25px;
-      height: 25px;
+      width: 100px;
+      height: 100px;
+      font-size: 80px;
     }
   </style>
 
@@ -26,41 +33,41 @@
 <body>
   <h1>MineField Game</h1>
   <table class="board">
-    <tr>
-      <td id="1"></td>
-      <td id="2"></td>
-      <td id="3"></td>
-      <td id="4"></td>
-      <td id="5"></td>
-    </tr>
-    <tr>
-      <td id="6"></td>
-      <td id="7"></td>
-      <td id="8"></td>
-      <td id="9"></td>
-      <td id="10"></td>
-    </tr>
-    <tr>
-      <td id="11"></td>
-      <td id="12"></td>
-      <td id="13"></td>
-      <td id="14"></td>
-      <td id="15"></td>
-    </tr>
-    <tr>
-      <td id="16"></td>
-      <td id="17"></td>
-      <td id="18"></td>
-      <td id="19"></td>
-      <td id="20"></td>
-    </tr>
-    <tr>
-      <td id="21"></td>
-      <td id="22"></td>
-      <td id="23"></td>
-      <td id="24"></td>
-      <td id="25"></td>
-    </tr>
+    <div class="row">
+      <div id="1"></div>
+      <div id="2"></div>
+      <div id="3"></div>
+      <div id="4"></div>
+      <div id="5"></div>
+    </div>
+    <div class="row">
+      <div id="6"></div>
+      <div id="7"></div>
+      <div id="8"></div>
+      <div id="9"></div>
+      <div id="10"></div>
+    </div>
+    <div class="row">
+      <div id="11"></div>
+      <div id="12"></div>
+      <div id="13"></div>
+      <div id="14"></div>
+      <div id="15"></div>
+    </div>
+    <div class="row">
+      <div id="16"></div>
+      <div id="17"></div>
+      <div id="18"></div>
+      <div id="19"></div>
+      <div id="20"></div>
+    </div>
+    <div class="row">
+      <div id="21"></div>
+      <div id="22"></div>
+      <div id="23"></div>
+      <div id="24"></div>
+      <div id="25"></div>
+    </div>
   </table>
   <h3 id="result"></h3>
 </body>
