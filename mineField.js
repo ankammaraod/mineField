@@ -1,3 +1,10 @@
+const display = (message) => {
+  document.getElementById('result').innerText = message;
+  setTimeout(() => {
+    document.getElementById('result').innerText = '';
+  }, 1000);
+};
+
 const randInt = (num) => Math.floor(Math.random() * num);
 
 const generateObstacles = (limit, count) => {
@@ -8,7 +15,7 @@ const generateObstacles = (limit, count) => {
   return obstacles;
 };
 
-const relevantOffset = (game, event) => {
+const fetchOffset = (game, event) => {
   let offset = 0;
   if (event.code === 'ArrowLeft' && !game.isLeftExtreme()) {
     offset = -1;
@@ -27,19 +34,7 @@ const relevantOffset = (game, event) => {
 
 const onKeyAccess = (game, player) => {
   return (event) => {
-    const offset = relevantOffset(game, event);
-    // if (event.code === 'ArrowLeft' && !game.isLeftExtreme()) {
-    //   offset = -1;
-    // }
-    // if (event.code === 'ArrowUp' && !game.isFirstRow()) {
-    //   offset = -5;
-    // }
-    // if (event.code === 'ArrowRight' && !game.isRightExtreme()) {
-    //   offset = 1;
-    // }
-    // if (event.code === 'ArrowDown' && !game.isLastRow()) {
-    //   offset = 5
-    // }
+    const offset = fetchOffset(game, event);
 
     player.updatePlayerPosition(offset)
     erasePlayer(player);
@@ -47,10 +42,11 @@ const onKeyAccess = (game, player) => {
       alert('bomb');
       player.resetPosition();
     }
+
     drawPlayer(player);
 
     if (game.winningDecision()) {
-      alert('Blind person saved successfully');
+      display('Blind person saved successfully')
       player.resetPosition();
       erasePlayer(player);
       drawPlayer(player);
