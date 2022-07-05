@@ -10,14 +10,10 @@ const display = (message) => {
   }, 3000);
 };
 
-const erasePlayer = (player) => {
-  const { prevPosition } = player.getInfo();
-  document.getElementById(prevPosition).innerText = '';
-};
-
-const drawPlayer = (player) => {
-  const { currentPosition, symbol } = player.getInfo();
-  const element = document.getElementById(currentPosition);
-  element.innerHTML = symbol;
-
+const drawPlayer = (position) => {
+  const currentPosition = position.getPosition();
+  const player = document.getElementById('player');
+  player.parentElement.removeChild(player);
+  const targetElement = document.getElementById(currentPosition);
+  targetElement.appendChild(player);
 };

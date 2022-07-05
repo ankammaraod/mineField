@@ -8,51 +8,54 @@ const generateObstacles = (limit, count) => {
   return obstacles;
 };
 
-const fetchOffset = (game, event) => {
-  let offset = 0;
+const movePlayer = (game, player, event) => {
+
   if (event.code === 'ArrowLeft' && !game.isLeftExtreme()) {
-    offset = -1;
+    player.moveLeft();
   }
+
   if (event.code === 'ArrowUp' && !game.isFirstRow()) {
-    offset = -5;
+    player.moveUp();
   }
+
   if (event.code === 'ArrowRight' && !game.isRightExtreme()) {
-    offset = 1;
+    player.moveRight();
   }
+
   if (event.code === 'ArrowDown' && !game.isLastRow()) {
-    offset = 5
+    player.moveDown();
   }
-  return offset;
 };
 
-const onKeyAccess = (game, player) => {
-  return (event) => {
-    const offset = fetchOffset(game, event);
+const onKeyAccess = (game, player, position) => {
 
-    player.updatePlayerPosition(offset)
-    erasePlayer(player);
-    if (!game.isValidMove()) {
+  return (event) => {
+
+    movePlayer(game, player, event);
+    drawPlayer(position);
+
+    if (game.isInValidMove()) {
       display('BOMB...');
     }
-    drawPlayer(player);
 
-    if (game.winningDecision()) {
+    if (game.hasWon()) {
       display('Blind person saved successfully')
     }
   };
 }
 
 const main = () => {
-  const obstaclesLoc = generateObstacles(24, 5);
-  console.log(obstaclesLoc);
-  const player = new Player(1, 1);
-  const obstacles = new Obstacles(obstaclesLoc);
+  const minesPositions = generateObstacles(24, 5);
+  console.log(minesPositions);
 
-  const game = new Game(player, obstacles, 25);
+  const position = new Position(1);
+  const player = new Player(position);
 
-  drawPlayer(player);
+  const game = new Game(player, minesPositions, 25);
 
-  const onKeyPress = onKeyAccess(game, player);
+  drawPlayer(position);
+
+  const onKeyPress = onKeyAccess(game, player, position);
   document.onkeydown = (event) => onKeyPress(event);
 };
 
