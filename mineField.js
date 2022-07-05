@@ -1,10 +1,3 @@
-const display = (message) => {
-  document.getElementById('result').innerText = message;
-  setTimeout(() => {
-    document.getElementById('result').innerText = '';
-  }, 500);
-};
-
 const randInt = (num) => Math.floor(Math.random() * num);
 
 const generateObstacles = (limit, count) => {
@@ -39,17 +32,12 @@ const onKeyAccess = (game, player) => {
     player.updatePlayerPosition(offset)
     erasePlayer(player);
     if (!game.isValidMove()) {
-      display('BOMB...')
-      player.resetPosition();
+      display('BOMB...');
     }
-
     drawPlayer(player);
 
     if (game.winningDecision()) {
       display('Blind person saved successfully')
-      player.resetPosition();
-      erasePlayer(player);
-      drawPlayer(player);
     }
   };
 }
@@ -61,6 +49,7 @@ const main = () => {
   const obstacles = new Obstacles(obstaclesLoc);
 
   const game = new Game(player, obstacles, 25);
+
   drawPlayer(player);
 
   const onKeyPress = onKeyAccess(game, player);
