@@ -24,8 +24,6 @@ class Position {
   }
 
   isEqual(position) {
-    console.log('--position', position);
-    console.log('--currentPosition', this.currentPosition);
     return position === this.currentPosition;
   }
 
