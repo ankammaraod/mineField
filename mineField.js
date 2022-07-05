@@ -2,7 +2,7 @@ const display = (message) => {
   document.getElementById('result').innerText = message;
   setTimeout(() => {
     document.getElementById('result').innerText = '';
-  }, 1000);
+  }, 500);
 };
 
 const randInt = (num) => Math.floor(Math.random() * num);
@@ -39,7 +39,7 @@ const onKeyAccess = (game, player) => {
     player.updatePlayerPosition(offset)
     erasePlayer(player);
     if (!game.isValidMove()) {
-      alert('bomb');
+      display('BOMB...')
       player.resetPosition();
     }
 
